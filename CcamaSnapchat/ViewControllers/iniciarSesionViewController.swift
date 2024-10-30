@@ -18,7 +18,6 @@ class iniciarSesionViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
 
     @IBAction func IniciarSesionTapped(_ sender: Any) {
@@ -26,8 +25,19 @@ class iniciarSesionViewController: UIViewController {
             print("Intentando Iniciar Sesión")
             if error != nil {
                 print("se presentó el siguiente error: \(error)")
+                
+                let alerta = UIAlertController(title: "Error", message: "Usuario no encontrado. Por favor, registre una cuenta", preferredStyle: .alert)
+                let btnCrear = UIAlertAction(title: "Crear", style: .default, handler: { (UIAlertAction) in
+                    self.performSegue(withIdentifier: "registrarSegue", sender: nil)
+                })
+                let btnCancelar = UIAlertAction(title: "Cancelar", style: .default, handler: nil)
+                alerta.addAction(btnCrear)
+                alerta.addAction(btnCancelar)
+                self.present(alerta, animated: true, completion: nil)
+                
             } else {
                 print("Inicio de sesion exitoso")
+                self.performSegue(withIdentifier: "iniciarsesionsegue", sender: nil)
             }
         }
     }

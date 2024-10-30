@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E29029C22CC9B019008E828C /* SnapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29029C12CC9B019008E828C /* SnapsViewController.swift */; };
+		E29029C42CC9B485008E828C /* ImagenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29029C32CC9B485008E828C /* ImagenViewController.swift */; };
+		E2986BD52CCAAED900D54E09 /* ElegirUsuarioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2986BD42CCAAED900D54E09 /* ElegirUsuarioViewController.swift */; };
+		E2986BD92CCAB68800D54E09 /* Usuario.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2986BD82CCAB68800D54E09 /* Usuario.swift */; };
+		E2986BDB2CCABE3200D54E09 /* RegistroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2986BDA2CCABE3200D54E09 /* RegistroViewController.swift */; };
 		E29B271E2CC05BB800728851 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B271D2CC05BB800728851 /* AppDelegate.swift */; };
 		E29B27202CC05BB800728851 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B271F2CC05BB800728851 /* SceneDelegate.swift */; };
 		E29B27222CC05BB800728851 /* iniciarSesionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29B27212CC05BB800728851 /* iniciarSesionViewController.swift */; };
@@ -24,6 +29,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E29029C12CC9B019008E828C /* SnapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapsViewController.swift; sourceTree = "<group>"; };
+		E29029C32CC9B485008E828C /* ImagenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagenViewController.swift; sourceTree = "<group>"; };
+		E2986BD42CCAAED900D54E09 /* ElegirUsuarioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElegirUsuarioViewController.swift; sourceTree = "<group>"; };
+		E2986BD82CCAB68800D54E09 /* Usuario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usuario.swift; sourceTree = "<group>"; };
+		E2986BDA2CCABE3200D54E09 /* RegistroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistroViewController.swift; sourceTree = "<group>"; };
 		E29B271A2CC05BB800728851 /* CcamaSnapchat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CcamaSnapchat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B271D2CC05BB800728851 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E29B271F2CC05BB800728851 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -53,6 +63,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E2986BD62CCAB57400D54E09 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E29B27212CC05BB800728851 /* iniciarSesionViewController.swift */,
+				E29029C32CC9B485008E828C /* ImagenViewController.swift */,
+				E29029C12CC9B019008E828C /* SnapsViewController.swift */,
+				E2986BD42CCAAED900D54E09 /* ElegirUsuarioViewController.swift */,
+				E2986BDA2CCABE3200D54E09 /* RegistroViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		E2986BD72CCAB65800D54E09 /* Modelos */ = {
+			isa = PBXGroup;
+			children = (
+				E2986BD82CCAB68800D54E09 /* Usuario.swift */,
+			);
+			path = Modelos;
+			sourceTree = "<group>";
+		};
 		E29B27112CC05BB800728851 = {
 			isa = PBXGroup;
 			children = (
@@ -72,10 +102,11 @@
 		E29B271C2CC05BB800728851 /* CcamaSnapchat */ = {
 			isa = PBXGroup;
 			children = (
+				E2986BD72CCAB65800D54E09 /* Modelos */,
+				E2986BD62CCAB57400D54E09 /* ViewControllers */,
 				E29B27432CC07ADA00728851 /* GoogleService-Info.plist */,
 				E29B271D2CC05BB800728851 /* AppDelegate.swift */,
 				E29B271F2CC05BB800728851 /* SceneDelegate.swift */,
-				E29B27212CC05BB800728851 /* iniciarSesionViewController.swift */,
 				E29B27232CC05BB800728851 /* Main.storyboard */,
 				E29B27262CC05BBF00728851 /* Assets.xcassets */,
 				E29B27282CC05BBF00728851 /* LaunchScreen.storyboard */,
@@ -169,9 +200,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29029C22CC9B019008E828C /* SnapsViewController.swift in Sources */,
+				E29029C42CC9B485008E828C /* ImagenViewController.swift in Sources */,
+				E2986BD92CCAB68800D54E09 /* Usuario.swift in Sources */,
 				E29B27222CC05BB800728851 /* iniciarSesionViewController.swift in Sources */,
 				E29B271E2CC05BB800728851 /* AppDelegate.swift in Sources */,
+				E2986BDB2CCABE3200D54E09 /* RegistroViewController.swift in Sources */,
 				E29B27202CC05BB800728851 /* SceneDelegate.swift in Sources */,
+				E2986BD52CCAAED900D54E09 /* ElegirUsuarioViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
