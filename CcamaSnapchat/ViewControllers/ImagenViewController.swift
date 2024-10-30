@@ -9,12 +9,13 @@ import UIKit
 import FirebaseStorage
 
 class ImagenViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-    var imagePicker = UIImagePickerController()
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var descripcionTextField: UITextField!
     @IBOutlet weak var elegirContactoBoton: UIButton!
+    
+    var imagePicker = UIImagePickerController()
+    var imagenID = NSUUID().uuidString
     
     override func viewDidLoad() {
         super.viewDidLoad()
