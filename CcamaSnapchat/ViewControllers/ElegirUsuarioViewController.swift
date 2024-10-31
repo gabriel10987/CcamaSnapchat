@@ -13,8 +13,17 @@ class ElegirUsuarioViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var listaUsuarios: UITableView!
     
     var usuarios:[Usuario] = []
+    
+    var tipoSnap = ""
+    
     var imagenURL = ""
     var descripcion = ""
+    var imagenID = ""
+    
+    // para el audio
+    var audioURL = ""
+    var titulo = ""
+    var audioID = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +31,6 @@ class ElegirUsuarioViewController: UIViewController, UITableViewDelegate, UITabl
         listaUsuarios.dataSource = self
         
         Database.database().reference().child("usuarios").observe(DataEventType.childAdded, with: {(snapshot) in
-            print(snapshot)
-            
             let usuario = Usuario()
             usuario.email = (snapshot.value as! NSDictionary)["email"] as! String
             usuario.uid = snapshot.key
@@ -46,8 +53,23 @@ class ElegirUsuarioViewController: UIViewController, UITableViewDelegate, UITabl
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let usuario = usuarios[indexPath.row]
-        let snap = ["from" : usuario.email, "descripcion" : descripcion, "imagenURL" : imagenURL]
+        var snap = ["from" : Auth.auth().currentUser?.email]
+        
+        if tipoSnap == "imagen" {
+            snap["descripcion"] = descripcion
+            snap["imagenURL"] = imagenURL
+            snap["imagenID"] = imagenID
+            snap["tipo"] = "imagen"
+        } else if tipoSnap == "audio" {
+            snap["audioURL"] = audioURL
+            snap["titulo"] = titulo
+            snap["audioID"] = audioID
+            snap["tipo"] = "audio"
+        }
+        
         Database.database().reference().child("usuarios").child(usuario.uid).child("snaps").childByAutoId().setValue(snap)
+        navigationController?.popViewController(animated: true)
     }
 
 }
+

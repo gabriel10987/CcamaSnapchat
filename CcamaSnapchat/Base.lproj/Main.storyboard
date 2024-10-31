@@ -238,11 +238,18 @@
                                 <action selector="cerrarSesionTapped:" destination="uK1-e9-MjS" id="q9L-Sx-5yD"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" systemItem="add" id="MJi-lW-ScY">
-                            <connections>
-                                <segue destination="gi3-NH-Tfv" kind="show" id="LUU-5C-QD6"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="play" id="4CO-Lm-Sj4">
+                                <connections>
+                                    <segue destination="hTk-NQ-uya" kind="show" id="zZ9-oa-4wZ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="camera" id="MJi-lW-ScY">
+                                <connections>
+                                    <segue destination="gi3-NH-Tfv" kind="show" id="LUU-5C-QD6"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="tablaSnaps" destination="KBY-mo-F0v" id="Dm9-U9-OCd"/>
@@ -307,7 +314,78 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iv9-1m-QgD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1595.6521739130435" y="802.90178571428567"/>
+            <point key="canvasLocation" x="1597" y="810"/>
+        </scene>
+        <!--Audio View Controller-->
+        <scene sceneID="SaG-Rk-QVa">
+            <objects>
+                <viewController id="hTk-NQ-uya" customClass="AudioViewController" customModule="CcamaSnapchat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="pQI-Sg-tcg">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mMi-xb-s9N">
+                                <rect key="frame" x="156.5" y="108" width="101" height="46"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="grabar" title="Grabar"/>
+                                <connections>
+                                    <action selector="grabarTapped:" destination="hTk-NQ-uya" eventType="touchUpInside" id="zR6-9s-R3F"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Título" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="13A-3f-b75">
+                                <rect key="frame" x="184.5" y="184" width="45" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Título para el audio" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mzf-X7-R3v">
+                                <rect key="frame" x="87" y="225" width="240" height="34"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="cVu-Vm-MSf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qDO-y5-F5H">
+                                <rect key="frame" x="87" y="289" width="240" height="34.5"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="uAE-bI-SJu"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Elegir Contacto">
+                                    <fontDescription key="titleFontDescription" type="system" weight="medium" pointSize="17"/>
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="elegirContactoTapped:" destination="hTk-NQ-uya" eventType="touchUpInside" id="yjE-KJ-Iig"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="WJP-Ce-Nrb"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="13A-3f-b75" firstAttribute="top" secondItem="mMi-xb-s9N" secondAttribute="bottom" constant="30" id="1z8-ER-ngL"/>
+                            <constraint firstItem="mMi-xb-s9N" firstAttribute="centerX" secondItem="pQI-Sg-tcg" secondAttribute="centerX" id="A5e-5Z-1Ut"/>
+                            <constraint firstItem="13A-3f-b75" firstAttribute="centerX" secondItem="pQI-Sg-tcg" secondAttribute="centerX" id="FYs-2n-G84"/>
+                            <constraint firstItem="mzf-X7-R3v" firstAttribute="top" secondItem="13A-3f-b75" secondAttribute="bottom" constant="20" id="K9d-Ts-ByQ"/>
+                            <constraint firstItem="mMi-xb-s9N" firstAttribute="top" secondItem="WJP-Ce-Nrb" secondAttribute="top" constant="20" id="cwn-kW-RHz"/>
+                            <constraint firstItem="qDO-y5-F5H" firstAttribute="centerX" secondItem="pQI-Sg-tcg" secondAttribute="centerX" id="dTv-ue-1kr"/>
+                            <constraint firstItem="mzf-X7-R3v" firstAttribute="centerX" secondItem="pQI-Sg-tcg" secondAttribute="centerX" id="l03-lt-cUj"/>
+                            <constraint firstItem="qDO-y5-F5H" firstAttribute="top" secondItem="mzf-X7-R3v" secondAttribute="bottom" constant="30" id="mmR-Nc-mTK"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="EbA-By-GcM"/>
+                    <connections>
+                        <outlet property="elegirContactoButton" destination="qDO-y5-F5H" id="MGS-jr-5Fp"/>
+                        <outlet property="grabarButton" destination="mMi-xb-s9N" id="8mx-hT-RUt"/>
+                        <outlet property="tituloTextField" destination="mzf-X7-R3v" id="6RX-O6-gmg"/>
+                        <segue destination="0gC-FZ-IDM" kind="show" identifier="seleccionarContactoSegue" id="UT6-9k-tQN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="QwY-vV-Xq9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2388" y="810"/>
         </scene>
         <!--Enviar Mensaje-->
         <scene sceneID="fVu-6d-FH7">
@@ -376,7 +454,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOT-Wb-KZK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2300" y="106"/>
+            <point key="canvasLocation" x="2387" y="106"/>
         </scene>
         <!--Lista de Usuarios-->
         <scene sceneID="29M-9a-ldi">
@@ -407,7 +485,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mDz-aF-pgu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3001" y="106"/>
+            <point key="canvasLocation" x="3087" y="106"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="h71-ss-Ro2">
@@ -429,10 +507,12 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="UT6-9k-tQN"/>
         <segue reference="lsj-G7-Hly"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="google.png" width="18" height="18"/>
+        <image name="grabar" width="32" height="32"/>
         <image name="imagen" width="256" height="256"/>
         <image name="registrar" width="128" height="128"/>
         <systemColor name="systemBackgroundColor">

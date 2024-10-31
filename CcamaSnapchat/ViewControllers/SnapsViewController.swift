@@ -7,29 +7,46 @@
 
 import UIKit
 import Firebase
+import AVFoundation
+import FirebaseStorage
 
-class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AVAudioPlayerDelegate {
 
     @IBOutlet weak var tablaSnaps: UITableView!
     
     var snaps:[Snap] = []
+    var audioPlayer: AVAudioPlayer?
+    var snapEnReproduccion: Snap?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tablaSnaps.delegate = self
         tablaSnaps.dataSource = self
         
-        Database.database().reference().child("usuarios").child((Auth.auth().currentUser?.uid)!).child("snaps").observe(DataEventType.childAdded, with: { (snapshot) in
+        let usuarioSnapsRef = Database.database().reference().child("usuarios").child((Auth.auth().currentUser?.uid)!).child("snaps")
+        
+        usuarioSnapsRef.observe(DataEventType.childAdded, with: { (snapshot) in
+            let snapData = snapshot.value as! NSDictionary
             let snap = Snap()
-            snap.imagenURL = (snapshot.value as! NSDictionary)["imagenURL"] as! String
-            snap.from = (snapshot.value as! NSDictionary)["from"] as! String
-            snap.descripcion = (snapshot.value as! NSDictionary)["descripcion"] as! String
             snap.id = snapshot.key
+            snap.from = snapData["from"] as! String
+            snap.tipo = snapData["tipo"] as! String
+            
+            if snap.tipo == "imagen" {
+                snap.imagenURL = snapData["imagenURL"] as! String
+                snap.descripcion = snapData["descripcion"] as! String
+                snap.imagenID = snapData["imagenID"] as! String
+            } else if snap.tipo == "audio" {
+                snap.audioURL = snapData["audioURL"] as! String
+                snap.titulo = snapData["titulo"] as! String
+                snap.audioID = snapData["audioID"] as! String
+            }
+            
             self.snaps.append(snap)
             self.tablaSnaps.reloadData()
         })
         
-        Database.database().reference().child("usuarios").child((Auth.auth().currentUser?.uid)!).child("snaps").observe(DataEventType.childRemoved, with: { (snapshot) in
+        usuarioSnapsRef.observe(DataEventType.childRemoved, with: { (snapshot) in
             var iterator = 0
             for snap in self.snaps{
                 if snap.id == snapshot.key{
@@ -46,19 +63,67 @@ class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return snaps.count
+        if snaps.count == 0 {
+            return 1
+        } else {
+            return snaps.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        let snap = snaps[indexPath.row]
-        cell.textLabel?.text = snap.from
+        if snaps.count == 0 {
+            cell.textLabel?.text = "No tiene Snaps 😭"
+        } else {
+            let snap = snaps[indexPath.row]
+            cell.textLabel?.text = snap.tipo == "imagen" ? "📷 \(snap.from)" : "🎶 \(snap.from)"
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let snap = snaps[indexPath.row]
-        performSegue(withIdentifier: "versnapsegue", sender: snap)
+        
+        if snap.tipo == "imagen" {
+            performSegue(withIdentifier: "versnapsegue", sender: snap)
+        } else if snap.tipo == "audio" {
+            reproducirAudio(snap: snap)
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func reproducirAudio(snap: Snap) {
+        guard let audioURL = URL(string: snap.audioURL) else {return}
+        
+        let session = URLSession.shared
+        let downloadTask = session.downloadTask(with: audioURL) { (location, response, error) in
+            if let location = location {
+                do {
+                    self.audioPlayer = try AVAudioPlayer(contentsOf: location)
+                    self.audioPlayer?.delegate = self
+                    self.snapEnReproduccion = snap
+                    self.audioPlayer?.play()
+                } catch {
+                    print("Error al reproducir el audio: \(error)")
+                }
+            } else {
+                print("Error al descargar el audio")
+            }
+        }
+        downloadTask.resume()
+    }
+    
+    // detectar cuando el audio ha terminado
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        if let snap = snapEnReproduccion {
+            Database.database().reference().child("usuarios").child((Auth.auth().currentUser?.uid)!).child("snaps").child(snap.id).removeValue()
+            
+            Storage.storage().reference().child("audios").child("\(snap.audioID).m4a").delete { (error) in
+                print("Se elimino el audio correctamente")
+            }
+            snapEnReproduccion = nil
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -67,5 +132,5 @@ class SnapsViewController: UIViewController, UITableViewDelegate, UITableViewDat
             siguienteVC.snap = sender as! Snap
         }
     }
-
 }
+

@@ -33,7 +33,7 @@ class ImagenViewController: UIViewController, UIImagePickerControllerDelegate, U
         self.elegirContactoBoton.isEnabled = false
         let imagenesFolder = Storage.storage().reference().child("imagenes")
         let imagenData = imageView.image?.jpegData(compressionQuality: 0.50)
-        let cargarImagen = imagenesFolder.child("\(NSUUID().uuidString).jpg")
+        let cargarImagen = imagenesFolder.child("\(imagenID).jpg")
             cargarImagen.putData(imagenData!, metadata: nil) { (metadata, error) in
             if error != nil {
                 self.mostrarAlerta(titulo: "Error", mensaje: "Se produjo un error al subir la imagen. Verifique su conexion a internet y vuelva a intentarlo", accion: "Aceptar")
@@ -53,24 +53,7 @@ class ImagenViewController: UIViewController, UIImagePickerControllerDelegate, U
                 
             }
         }
-        /*
-        let alertaCarga = UIAlertController(title: "Cargando Imagen...", message: "0%", preferredStyle: .alert)
-        let progresoCarga : UIProgressView = UIProgressView(progressViewStyle: .default)
-        cargarImagen.observe(.progress) { (snapshot) in
-            let porcentaje = Double(snapshot.progress!.completedUnitCount) / Double(snapshot.progress!.totalUnitCount)
-            print(porcentaje)
-            progresoCarga.setProgress(Float(porcentaje), animated: true)
-            progresoCarga.frame = CGRect(x: 10, y: 70, width: 250, height: 0)
-            alertaCarga.message = String(round(porcentaje*100.0)) + " %"
-            if porcentaje >= 1.0 {
-                alertaCarga.dismiss(animated: true, completion: nil)
-            }
-        }
-        let btnOK = UIAlertAction(title: "Aceptar", style: .default, handler: nil)
-        alertaCarga.addAction(btnOK)
-        alertaCarga.view.addSubview(progresoCarga)
-        present(alertaCarga, animated: true, completion: nil)
-         */
+
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
@@ -83,8 +66,10 @@ class ImagenViewController: UIViewController, UIImagePickerControllerDelegate, U
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let siguienteVC = segue.destination as! ElegirUsuarioViewController
+        siguienteVC.tipoSnap = "imagen"
         siguienteVC.imagenURL = sender as! String
         siguienteVC.descripcion = descripcionTextField.text!
+        siguienteVC.imagenID = imagenID
     }
     
     func mostrarAlerta(titulo: String, mensaje: String, accion: String) {

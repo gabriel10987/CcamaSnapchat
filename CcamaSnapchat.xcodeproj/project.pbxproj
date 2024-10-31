@@ -30,6 +30,7 @@
 		E29B27402CC0772E00728851 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = E29B273F2CC0772E00728851 /* GoogleSignIn */; };
 		E29B27422CC0772E00728851 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = E29B27412CC0772E00728851 /* GoogleSignInSwift */; };
 		E29B27442CC07ADA00728851 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E29B27432CC07ADA00728851 /* GoogleService-Info.plist */; };
+		E2A686442CD3F7450081EBAD /* AudioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2A686432CD3F7450081EBAD /* AudioViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		E29B27292CC05BBF00728851 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E29B272B2CC05BBF00728851 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E29B27432CC07ADA00728851 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E2A686432CD3F7450081EBAD /* AudioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +82,7 @@
 				E2986BD42CCAAED900D54E09 /* ElegirUsuarioViewController.swift */,
 				E2986BDA2CCABE3200D54E09 /* RegistroViewController.swift */,
 				E207E9372CD2E269003C8D17 /* VerSnapViewController.swift */,
+				E2A686432CD3F7450081EBAD /* AudioViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				E29B27222CC05BB800728851 /* iniciarSesionViewController.swift in Sources */,
 				E29B271E2CC05BB800728851 /* AppDelegate.swift in Sources */,
 				E2986BDB2CCABE3200D54E09 /* RegistroViewController.swift in Sources */,
+				E2A686442CD3F7450081EBAD /* AudioViewController.swift in Sources */,
 				E29B27202CC05BB800728851 /* SceneDelegate.swift in Sources */,
 				E2986BD52CCAAED900D54E09 /* ElegirUsuarioViewController.swift in Sources */,
 			);
